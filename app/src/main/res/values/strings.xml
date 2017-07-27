@@ -9,4 +9,9 @@
     <string name="provided_by_open_weather">Provided by open weather</string>
     <string name="current_weather">Current Weather</string>
     <string name="next_five_days">Next 5 days</string>
+    <string name="location_services_are_off">Location services are turned off</string>
+    <string name="error_location_is_off">Location is turned off</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="location_permission_denied">You denied location please enable it for the app to work</string>
 </resources>

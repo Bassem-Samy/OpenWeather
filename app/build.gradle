@@ -26,6 +26,7 @@ def rxAndroidVersion = "2.0.1"
 def daggerVersion = "2.11"
 def butterknifeVersion = "8.4.0"
 def glideVersion = "3.8.0"
+def playServicesVersion="11.0.1";
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -34,6 +35,9 @@ dependencies {
     compile "com.android.support:appcompat-v7:${supportVersion}"
 
     compile "com.android.support:design:${supportVersion}"
+    // play services
+
+    compile "com.google.android.gms:play-services-location:${playServicesVersion}"
     testCompile 'junit:junit:4.12'
     //Retrofit2
     compile "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
