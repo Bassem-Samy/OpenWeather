@@ -14,4 +14,6 @@
     <string name="ok">Ok</string>
     <string name="cancel">Cancel</string>
     <string name="location_permission_denied">You denied location please enable it for the app to work</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -29,6 +29,7 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.kbm.openweather.R;
+import com.kbm.openweather.ui.currentweather.CurrentWeatherFragment;
 import com.kbm.openweather.utils.LocationStatusHelper;
 
 import butterknife.BindView;
@@ -221,6 +222,15 @@ public class HomeActivity extends AppCompatActivity
         // do logic
         // enough for one update
         removeLocationUpdates();
+        initializeFragments(Double.toString(location.getLatitude()), Double.toString(location.getLongitude()));
+    }
+
+    private void initializeFragments(String latitude, String longitude) {
+        if (getSupportFragmentManager().findFragmentByTag(CurrentWeatherFragment.TAG) == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frm_container, CurrentWeatherFragment.newInstance(latitude, longitude), CurrentWeatherFragment.TAG)
+                    .commit();
+        }
     }
 
 
