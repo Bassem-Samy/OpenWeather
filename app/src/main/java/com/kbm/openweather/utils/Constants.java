@@ -5,6 +5,7 @@ package com.kbm.openweather.utils;
  */
 
 public class Constants {
-    public static String BASE_URL="http://api.openweathermap.org/data/2.5/";
-    public static String OPEN_WEATHER_KEY="3cb726822c464af37bbbbb89747e7640";
+    public static String BASE_URL = "http://api.openweathermap.org/data/2.5/";
+    public static String OPEN_WEATHER_KEY = "3cb726822c464af37bbbbb89747e7640";
+    public static WeatherUnits CURRENT_WEATHER_UNIT = WeatherUnits.IMPERIAL;
 }

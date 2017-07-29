@@ -23,6 +23,12 @@
 
     </style>
 
+    <style name="cardTitleTextStyle">
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textSize">@dimen/cardTitleTextSize</item>
+    </style>
+
     <dimen name="currentWeatherDegreeTextSize">64sp</dimen>
+    <dimen name="cardTitleTextSize">18sp</dimen>
     <color name="colorBlack">#000</color>
 </resources>

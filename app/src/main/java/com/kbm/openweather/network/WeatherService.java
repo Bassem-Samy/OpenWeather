@@ -12,5 +12,8 @@ import retrofit2.http.Query;
 
 public interface WeatherService {
     @GET("weather")
-    Single<CurrentWeatherResponse> getCurrentWeatherByLocation(@Query("appid") String appId, @Query("lat") String latitude, @Query("lon") String longitude);
+    Single<CurrentWeatherResponse> getCurrentWeatherByLocation(@Query("appid") String appId,
+                                                               @Query("lat") String latitude,
+                                                               @Query("lon") String longitude,
+                                                               @Query("units") String unit);
 }

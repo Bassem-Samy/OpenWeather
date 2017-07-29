@@ -10,5 +10,5 @@ import io.reactivex.Single;
 
 public interface CurrentWeatherInteractor {
 
-    Single<CurrentWeatherResponse> getCurrentWeatherByLocation(String appid, String latitude, String longitude);
+    Single<CurrentWeatherResponse> getCurrentWeatherByLocation(String appid, String latitude, String longitude,String unit);
 }

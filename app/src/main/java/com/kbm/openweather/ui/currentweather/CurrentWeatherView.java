@@ -1,5 +1,6 @@
 package com.kbm.openweather.ui.currentweather;
 
+import com.kbm.openweather.models.CurrentWeatherDisplay;
 import com.kbm.openweather.models.CurrentWeatherResponse;
 import com.kbm.openweather.utils.BaseView;
 
@@ -9,6 +10,6 @@ import com.kbm.openweather.utils.BaseView;
 
 public interface CurrentWeatherView extends BaseView {
 
-    void updateData(CurrentWeatherResponse currentWeather);
+    void updateData(CurrentWeatherDisplay currentWeather);
 
 }

@@ -13,4 +13,6 @@
     <dimen name="current_weather_card_horizontal_margin">20dp</dimen>
     <dimen name="current_weather_card_top_margin">30dp</dimen>
     <dimen name="countryTextSize">18sp</dimen>
+    <dimen name="current_weather_icon_height">50dp</dimen>
+    <dimen name="current_weather_icon_width">50dp</dimen>
 </resources>

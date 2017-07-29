@@ -13,8 +13,9 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 public class ImageLoader {
     private static final String BASE_IMAGE_URL = "http://openweathermap.org/img/w/";
+    private static final String DEFAULT_IMAGE_EXTENSION = ".png";
 
     public static void loadImage(String imageUrl, ImageView imageView) {
-        Glide.with(imageView.getContext()).load(imageUrl).asBitmap().into(imageView);
+        Glide.with(imageView.getContext()).load(BASE_IMAGE_URL+imageUrl+DEFAULT_IMAGE_EXTENSION).asBitmap().into(imageView);
     }
 }

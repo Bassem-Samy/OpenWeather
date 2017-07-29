@@ -5,7 +5,7 @@ package com.kbm.openweather.ui.currentweather;
  */
 
 public interface CurrentWeatherPresenter {
-    void getCurrentWeatherByLocation(String appId, String latitude, String longitude);
+    void getCurrentWeatherByLocation(String appId, String latitude, String longitude,String unit);
 
     void onDestroy();
 }

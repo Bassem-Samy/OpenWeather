@@ -18,7 +18,7 @@ public class CurrentWeatherInteractorImpl implements CurrentWeatherInteractor {
     }
 
     @Override
-    public Single<CurrentWeatherResponse> getCurrentWeatherByLocation(String appid, String latitude, String longitude) {
-        return mRetrofit.create(WeatherService.class).getCurrentWeatherByLocation(appid, latitude, longitude);
+    public Single<CurrentWeatherResponse> getCurrentWeatherByLocation(String appid, String latitude, String longitude,String unit) {
+        return mRetrofit.create(WeatherService.class).getCurrentWeatherByLocation(appid, latitude, longitude,unit);
     }
 }
