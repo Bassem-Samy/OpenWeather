@@ -16,4 +16,9 @@
     <string name="location_permission_denied">You denied location please enable it for the app to work</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="fetching_location_please_wait">Fetching your current location</string>
+    <string name="fahrenheit">°F</string>
+    <string name="wind_title">Wind:</string>
+    <string name="sunrise_title">Sunrise:</string>
+    <string name="sunset_title">Sunset:</string>
 </resources>

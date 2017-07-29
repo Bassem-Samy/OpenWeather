@@ -6,4 +6,17 @@
     tools:context="com.kbm.openweather.ui.HomeActivity"
     tools:showIn="@layout/app_bar_home">
 
+    <ProgressBar
+        android:id="@+id/prgrs_fetching_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/prgrs_fetching_location"
+        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/margin5"
+        android:text="@string/fetching_location_please_wait" />
 </RelativeLayout>

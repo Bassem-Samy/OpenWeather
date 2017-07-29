@@ -21,6 +21,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -53,6 +55,8 @@ public class HomeActivity extends AppCompatActivity
     DrawerLayout drawer;
     @BindView(R.id.nav_view)
     NavigationView navigationView;
+    @BindView(R.id.rltv_loading_fetching_location)
+    RelativeLayout fechingLocationRelativeLayout;
     GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
     private Location mCurrentLocation;
@@ -222,6 +226,8 @@ public class HomeActivity extends AppCompatActivity
         // do logic
         // enough for one update
         removeLocationUpdates();
+        mCurrentLocation = location;
+        fechingLocationRelativeLayout.setVisibility(View.GONE);
         initializeFragments(Double.toString(location.getLatitude()), Double.toString(location.getLongitude()));
     }
 
