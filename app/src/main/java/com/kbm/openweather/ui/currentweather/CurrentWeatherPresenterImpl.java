@@ -43,7 +43,7 @@ public class CurrentWeatherPresenterImpl implements CurrentWeatherPresenter {
     public void getCurrentWeatherByLocation(String appId, String latitude, String longitude, String unit) {
         disposeRequest();
         if (!NetworkStatusHelper.checkInternetAvailable(mContextWeakReference.get())) {
-            mView.showProgress();
+            mView.showNoInternet();
             return;
         }
         mView.showProgress();

@@ -1,6 +1,7 @@
 package com.kbm.openweather.network;
 
 import com.kbm.openweather.models.CurrentWeatherResponse;
+import com.kbm.openweather.models.ForecastResponse;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -16,4 +17,10 @@ public interface WeatherService {
                                                                @Query("lat") String latitude,
                                                                @Query("lon") String longitude,
                                                                @Query("units") String unit);
+
+    @GET("forecast")
+    Single<ForecastResponse> getForecastByLocation(@Query("appid") String appId,
+                                                         @Query("lat") String latitude,
+                                                         @Query("lon") String longitude,
+                                                         @Query("units") String unit);
 }
