@@ -32,6 +32,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.kbm.openweather.R;
 import com.kbm.openweather.ui.currentweather.CurrentWeatherFragment;
+import com.kbm.openweather.ui.forecast.ForecastFragment;
 import com.kbm.openweather.utils.LocationStatusHelper;
 
 import butterknife.BindView;
@@ -120,10 +121,14 @@ public class HomeActivity extends AppCompatActivity
         if (id == R.id.nav_current_weather) {
             // Handle the camera action
         } else if (id == R.id.nav_next_five_days) {
+            if (mCurrentLocation != null) {
+                addForecastFragment();
+            }
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
 
     /**
@@ -149,8 +154,9 @@ public class HomeActivity extends AppCompatActivity
                     .addApi(LocationServices.API)
                     .build();
         }
-        if (mGoogleApiClient.isConnected() == false)
+        if (mGoogleApiClient.isConnected() == false) {
             mGoogleApiClient.connect();
+        }
     }
 
     private void requestLocationUpdate() {
@@ -239,6 +245,15 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
+    private void addForecastFragment() {
+        if (getSupportFragmentManager().findFragmentByTag(ForecastFragment.TAG) == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frm_container,
+                            ForecastFragment.newInstance(Double.toString(mCurrentLocation.getLatitude()), Double.toString(mCurrentLocation.getLongitude())),
+                            ForecastFragment.TAG)
+                    .commit();
+        }
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
