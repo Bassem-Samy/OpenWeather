@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'testalias'
+            keyPassword 'test123456'
+            storeFile file('test.jks')
+            storePassword 'test123456'
+        }
+    }
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
     defaultConfig {
@@ -15,6 +23,8 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
         }
     }
 }
@@ -28,17 +38,15 @@ def butterknifeVersion = "8.4.0"
 def glideVersion = "3.8.0"
 def playServicesVersion = "11.0.1";
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile "com.android.support:appcompat-v7:${supportVersion}"
-
     compile "com.android.support:design:${supportVersion}"
     compile "com.android.support:cardview-v7:${supportVersion}"
     compile "com.android.support:recyclerview-v7:${supportVersion}"
     // play services
-
     compile "com.google.android.gms:play-services-location:${playServicesVersion}"
     //Retrofit2
     compile "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
@@ -54,7 +62,6 @@ dependencies {
     annotationProcessor "com.jakewharton:butterknife-compiler:${butterknifeVersion}"
     // Glide
     compile "com.github.bumptech.glide:glide:${glideVersion}"
-
     compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     provided 'javax.annotation:jsr250-api:1.0'
