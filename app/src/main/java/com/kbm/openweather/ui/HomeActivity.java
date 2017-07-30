@@ -50,6 +50,8 @@ public class HomeActivity extends AppCompatActivity
     private static final int MY_PERMISSION_ACCESS_LOCATION = 1;
     private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
     private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = 1000;
+
+    private int lastCheckedMenuItem = -1;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.drawer_layout)
@@ -117,10 +119,11 @@ public class HomeActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        lastCheckedMenuItem = id;
         if (id == R.id.nav_current_weather) {
-            // Handle the camera action
+            addCurrentWeatherFragment();
         } else if (id == R.id.nav_next_five_days) {
+
             if (mCurrentLocation != null) {
                 addForecastFragment();
             }
@@ -128,7 +131,6 @@ public class HomeActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
 
     /**
@@ -238,9 +240,20 @@ public class HomeActivity extends AppCompatActivity
     }
 
     private void initializeFragments(String latitude, String longitude) {
+        if (lastCheckedMenuItem == -1 || lastCheckedMenuItem == R.id.nav_current_weather) {
+            addCurrentWeatherFragment();
+            navigationView.setCheckedItem(R.id.nav_current_weather);
+        } else {
+            addForecastFragment();
+
+            navigationView.setCheckedItem(R.id.nav_next_five_days);
+        }
+    }
+
+    private void addCurrentWeatherFragment() {
         if (getSupportFragmentManager().findFragmentByTag(CurrentWeatherFragment.TAG) == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.frm_container, CurrentWeatherFragment.newInstance(latitude, longitude), CurrentWeatherFragment.TAG)
+                    .replace(R.id.frm_container, CurrentWeatherFragment.newInstance(Double.toString(mCurrentLocation.getLatitude()), Double.toString(mCurrentLocation.getLongitude())), CurrentWeatherFragment.TAG)
                     .commit();
         }
     }
