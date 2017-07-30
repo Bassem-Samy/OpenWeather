@@ -214,7 +214,10 @@ public class HomeActivity extends AppCompatActivity
     public void onConnected(@Nullable Bundle bundle) {
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-         /*   mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+         /** In case if the app logic is to use the last provided location if exists instead of requesting updates everytime the app runs, which might not be accurate.
+          * So prefered to request location updates everytime.
+
+         mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             if (mCurrentLocation != null) {
                 // got locations
             } else {
