@@ -10,9 +10,7 @@ import com.kbm.openweather.utils.NetworkStatusHelper;
 import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,6 +20,7 @@ import java.util.Map;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -67,7 +66,23 @@ public class ForecastPresenterImpl implements ForecastPresenter {
                     }
                 }).subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe();
+                .subscribe(new Consumer<List<ForecastDay>>() {
+                    @Override
+                    public void accept(@NonNull List<ForecastDay> forecastDays) throws Exception {
+                        mView.hideProgress();
+                        if (forecastDays != null && forecastDays.size() > 0) {
+                            mView.updateData(forecastDays);
+                        } else {
+                            mView.showNoData();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(@NonNull Throwable throwable) throws Exception {
+                        mView.hideProgress();
+                        mView.showError();
+                    }
+                });
     }
 
     private List<ForecastDay> prepareForecastDays(ForecastResponse forecastResponse) {
@@ -103,6 +118,13 @@ public class ForecastPresenterImpl implements ForecastPresenter {
             forecastDays.add(forecastDay);
             iterator.remove();
         }
+        /**
+         * TODO According to the requirement it should be 5 days only, but the forecast api returns the later 3 hours of the same day
+         * logically it's ok to leave it display the later hours for today if want next 5 only then uncomment the following lines
+         // if includes today remove it
+         if (forecastDays.size() == 6) {
+         forecastDays.remove(0);
+         }*/
         Collections.sort(forecastDays);
         return forecastDays;
     }
