@@ -32,7 +32,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.kbm.openweather.MainActivity;
 import com.kbm.openweather.R;
 import com.kbm.openweather.ui.currentweather.CurrentWeatherFragment;
 import com.kbm.openweather.ui.forecast.ForecastFragment;

@@ -1,4 +1,4 @@
-package com.kbm.openweather;
+package com.kbm.openweather.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,13 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
-import com.kbm.openweather.ui.HomeActivity;
+import com.kbm.openweather.R;
+
+import io.fabric.sdk.android.Fabric;
 
 import java.util.Arrays;
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         initializeFacebookLogin();
@@ -76,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_skip)
     void skip() {
+
         HomeActivity.start(this);
         finish();
 
