@@ -46,7 +46,7 @@ public class ForecastToDaysConverterTest {
     }
 
     @Test
-    public void testConverterPersonList() {
+    public void testConvertForecastDays() {
         List<ForecastDay> items = ForecastToDaysConverter.getForecastDaysFromResponse(response);
         // check items size are correct
         assertEquals(items.size(), EXPECTED_ITEMS_COUNT);
@@ -57,4 +57,11 @@ public class ForecastToDaysConverterTest {
         assertEquals(items.get(LAST_ITEM_ITEM_INDEX).getDateText(), LAST_ITEM_EXPECTED_DATE_TEXT);
         assertEquals(items.get(LAST_ITEM_ITEM_INDEX).getForecastItems().size(), LAST_ITEM_EXPECTED_FORECAST_ITEMS_SIZE);
     }
+    @Test
+    public void testEmptyForecast(){
+        ForecastResponse response=new ForecastResponse();
+        List<ForecastDay> items=ForecastToDaysConverter.getForecastDaysFromResponse(response);
+        assertEquals(items.size(),0);
+    }
+
 }

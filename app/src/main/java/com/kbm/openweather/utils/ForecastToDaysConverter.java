@@ -27,21 +27,23 @@ public class ForecastToDaysConverter {
         List<ForecastDay> forecastDays = new ArrayList<>();
         HashMap<String, List<ForecastItem>> daysMap = new HashMap<>();
         List<ForecastItem> tempItems;
-        for (ForecastItem item : forecastResponse.getForecastItems()
-                ) {
-            if (item.getDateText() != null) {
-                String[] splits = item.getDateText().split(" ");
-                if (splits.length == 2) {
-                    tempItems = daysMap.get(splits[0]);
-                    if (tempItems == null) {
-                        tempItems = new ArrayList<>();
-                    }
-                    if (item.getDateTime() != null && item.getDateText() != "") {
-                        item.setDisplayHour(hourSimpleDateFormat.format(new Date(Long.parseLong(item.getDateTime()) * 1000L)));
-                    }
+        if (forecastResponse != null && forecastResponse.getForecastItems() != null) {
+            for (ForecastItem item : forecastResponse.getForecastItems()
+                    ) {
+                if (item.getDateText() != null) {
+                    String[] splits = item.getDateText().split(" ");
+                    if (splits.length == 2) {
+                        tempItems = daysMap.get(splits[0]);
+                        if (tempItems == null) {
+                            tempItems = new ArrayList<>();
+                        }
+                        if (item.getDateTime() != null && item.getDateText() != "") {
+                            item.setDisplayHour(hourSimpleDateFormat.format(new Date(Long.parseLong(item.getDateTime()) * 1000L)));
+                        }
 
-                    tempItems.add(item);
-                    daysMap.put(splits[0], tempItems);
+                        tempItems.add(item);
+                        daysMap.put(splits[0], tempItems);
+                    }
                 }
             }
         }
