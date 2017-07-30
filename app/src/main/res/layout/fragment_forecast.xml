@@ -2,12 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.kbm.openweather.ui.forecast.ForecastFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ProgressBar
+        android:id="@+id/prgrs_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" />
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_forecast"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+<android.support.design.widget.TabLayout
+    android:layout_width="match_parent"
+    android:id="@+id/tab_layout_days"
+    app:tabMode="scrollable"
+    android:layout_height="wrap_content"></android.support.design.widget.TabLayout>
+    </android.support.v4.view.ViewPager>
 </FrameLayout>

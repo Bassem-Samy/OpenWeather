@@ -1,12 +1,15 @@
 package com.kbm.openweather.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 /**
  * Created by Bassem on 7/28/2017.
  */
 
-public class WeatherItem {
+public class WeatherItem implements Parcelable{
     @SerializedName("id")
     private String id;
     @SerializedName("icon")
@@ -15,6 +18,25 @@ public class WeatherItem {
     private String description;
     @SerializedName("main")
     private String main;
+
+    protected WeatherItem(Parcel in) {
+        id = in.readString();
+        icon = in.readString();
+        description = in.readString();
+        main = in.readString();
+    }
+
+    public static final Creator<WeatherItem> CREATOR = new Creator<WeatherItem>() {
+        @Override
+        public WeatherItem createFromParcel(Parcel in) {
+            return new WeatherItem(in);
+        }
+
+        @Override
+        public WeatherItem[] newArray(int size) {
+            return new WeatherItem[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -48,4 +70,16 @@ public class WeatherItem {
         this.main = main;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(icon);
+        parcel.writeString(description);
+        parcel.writeString(main);
+    }
 }

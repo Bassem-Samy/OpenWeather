@@ -1,5 +1,8 @@
 package com.kbm.openweather.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -8,7 +11,28 @@ import java.util.List;
  * Created by Bassem on 7/29/2017.
  */
 
-public class ForecastItem {
+public class ForecastItem implements Parcelable {
+    protected ForecastItem(Parcel in) {
+        dateTime = in.readString();
+        wind = in.readParcelable(Wind.class.getClassLoader());
+        watherSys = in.readParcelable(WeatherSys.class.getClassLoader());
+        weatherItems = in.createTypedArrayList(WeatherItem.CREATOR);
+        dateText = in.readString();
+        mainWeatherInfo = in.readParcelable(MainWeatherInfo.class.getClassLoader());
+    }
+
+    public static final Creator<ForecastItem> CREATOR = new Creator<ForecastItem>() {
+        @Override
+        public ForecastItem createFromParcel(Parcel in) {
+            return new ForecastItem(in);
+        }
+
+        @Override
+        public ForecastItem[] newArray(int size) {
+            return new ForecastItem[size];
+        }
+    };
+
     public String getDateTime() {
         return dateTime;
     }
@@ -70,4 +94,18 @@ public class ForecastItem {
     @SerializedName("main")
     private MainWeatherInfo mainWeatherInfo;
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(dateTime);
+        parcel.writeParcelable(wind, i);
+        parcel.writeParcelable(watherSys, i);
+        parcel.writeTypedList(weatherItems);
+        parcel.writeString(dateText);
+        parcel.writeParcelable(mainWeatherInfo, i);
+    }
 }
