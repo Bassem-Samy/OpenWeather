@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Open Weather</string>
     <string name="title_activity_home">Open Weather</string>
+    <string name="facebook_app_id">491796907821396</string>
+    <string name="fb_login_protocol_scheme">fb2032856113602011</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -25,4 +27,7 @@
     <string name="no_internet_message">There\'s no internet connection</string>
     <string name="there_is_no_data_to_display">There\'s no data to display!</string>
     <string name="humidity_title">Humidity:</string>
+    <string name="login_with_facebook">Login with facebook</string>
+    <string name="skip">Skip</string>
+    <string name="action_logout">Log out</string>
 </resources>

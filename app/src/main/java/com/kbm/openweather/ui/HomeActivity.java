@@ -1,6 +1,7 @@
 package com.kbm.openweather.ui;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -25,11 +26,13 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.kbm.openweather.MainActivity;
 import com.kbm.openweather.R;
 import com.kbm.openweather.ui.currentweather.CurrentWeatherFragment;
 import com.kbm.openweather.ui.forecast.ForecastFragment;
@@ -108,7 +111,11 @@ public class HomeActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_logout) {
+            LoginManager.getInstance().logOut();
+            MainActivity.start(this);
+            finish();
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -304,5 +311,10 @@ public class HomeActivity extends AppCompatActivity
 
 
         }
+    }
+
+    public static void start(Context context) {
+        Intent intent = new Intent(context, HomeActivity.class);
+        context.startActivity(intent);
     }
 }
