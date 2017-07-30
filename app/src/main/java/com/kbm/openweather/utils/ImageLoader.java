@@ -1,5 +1,7 @@
 package com.kbm.openweather.utils;
 
+import android.support.annotation.ColorRes;
+import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +18,11 @@ public class ImageLoader {
     private static final String DEFAULT_IMAGE_EXTENSION = ".png";
 
     public static void loadImage(String imageUrl, ImageView imageView) {
-        Glide.with(imageView.getContext()).load(BASE_IMAGE_URL+imageUrl+DEFAULT_IMAGE_EXTENSION).asBitmap().into(imageView);
+        Glide.with(imageView.getContext()).load(BASE_IMAGE_URL + imageUrl + DEFAULT_IMAGE_EXTENSION).asBitmap().into(imageView);
     }
+
+    public static void loadImage(@DrawableRes int drawableId, ImageView imageView) {
+        Glide.with(imageView.getContext()).load(drawableId).asBitmap().into(imageView);
+    }
+
 }

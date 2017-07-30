@@ -126,7 +126,9 @@ public class ForecastFragment extends Fragment implements ForecastView {
     @Override
     public void updateData(List<ForecastDay> items) {
         if (mPagerAdapter == null) {
+
             mPagerAdapter = new ForecastFragmentPagerAdapter(getChildFragmentManager(), items);
+            forecastViewPager.setOffscreenPageLimit(items.size());
             forecastViewPager.setAdapter(mPagerAdapter);
             daysTabLayout.setupWithViewPager(forecastViewPager);
         }

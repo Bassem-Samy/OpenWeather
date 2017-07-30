@@ -5,6 +5,7 @@ import android.content.Context;
 import com.kbm.openweather.models.ForecastDay;
 import com.kbm.openweather.models.ForecastItem;
 import com.kbm.openweather.models.ForecastResponse;
+import com.kbm.openweather.utils.ForecastToDaysConverter;
 import com.kbm.openweather.utils.NetworkStatusHelper;
 
 import java.lang.ref.WeakReference;
@@ -29,7 +30,6 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class ForecastPresenterImpl implements ForecastPresenter {
-    private static final java.lang.String DATE_PATTERN = "yyyy-MM-dd";
     private ForecastView mView;
     private ForecastInteractor mInteractor;
     private Disposable mRequestDisposable;
@@ -40,7 +40,7 @@ public class ForecastPresenterImpl implements ForecastPresenter {
         this.mView = view;
         this.mInteractor = interactor;
         this.mContextWeakReference = new WeakReference<>(context);
-        mSimpleDateFormat = new SimpleDateFormat(DATE_PATTERN);
+
     }
 
     @Override
@@ -86,47 +86,7 @@ public class ForecastPresenterImpl implements ForecastPresenter {
     }
 
     private List<ForecastDay> prepareForecastDays(ForecastResponse forecastResponse) {
-        List<ForecastDay> forecastDays = new ArrayList<>();
-        HashMap<String, List<ForecastItem>> daysMap = new HashMap<>();
-        List<ForecastItem> tempItems;
-        for (ForecastItem item : forecastResponse.getForecastItems()
-                ) {
-            if (item.getDateText() != null) {
-                String[] splits = item.getDateText().split(" ");
-                if (splits.length == 2) {
-                    tempItems = daysMap.get(splits[0]);
-                    if (tempItems == null) {
-                        tempItems = new ArrayList<>();
-                    }
-                    tempItems.add(item);
-                    daysMap.put(splits[0], tempItems);
-                }
-            }
-        }
-        Iterator iterator = daysMap.entrySet().iterator();
-        Map.Entry tempEntry;
-        while (iterator.hasNext()) {
-            tempEntry = (Map.Entry) iterator.next();
-            ForecastDay forecastDay = new ForecastDay();
-            forecastDay.setDateText((String) tempEntry.getKey());
-            forecastDay.setForecastItems((List<ForecastItem>) tempEntry.getValue());
-            try {
-                forecastDay.setDate(mSimpleDateFormat.parse((String) tempEntry.getKey()));
-            } catch (Exception ex) {
-                forecastDay.setDate(new Date());
-            }
-            forecastDays.add(forecastDay);
-            iterator.remove();
-        }
-        /**
-         * TODO According to the requirement it should be 5 days only, but the forecast api returns the later 3 hours of the same day
-         * logically it's ok to leave it display the later hours for today if want next 5 only then uncomment the following lines
-         // if includes today remove it
-         if (forecastDays.size() == 6) {
-         forecastDays.remove(0);
-         }*/
-        Collections.sort(forecastDays);
-        return forecastDays;
+        return ForecastToDaysConverter.getForecastDaysFromResponse(forecastResponse);
     }
 
     @Override

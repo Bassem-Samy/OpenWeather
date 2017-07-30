@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -93,6 +94,8 @@ public class ForecastItem implements Parcelable {
     private String dateText;
     @SerializedName("main")
     private MainWeatherInfo mainWeatherInfo;
+    private String displayHour;
+
 
     @Override
     public int describeContents() {
@@ -107,5 +110,13 @@ public class ForecastItem implements Parcelable {
         parcel.writeTypedList(weatherItems);
         parcel.writeString(dateText);
         parcel.writeParcelable(mainWeatherInfo, i);
+    }
+
+    public String getDisplayHour() {
+        return displayHour;
+    }
+
+    public void setDisplayHour(String displayHour) {
+        this.displayHour = displayHour;
     }
 }
